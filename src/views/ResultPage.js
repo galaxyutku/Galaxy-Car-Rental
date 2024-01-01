@@ -1,11 +1,11 @@
 import React from "react";
 import "../styles.css";
 
-function SearchPage() {
+function ResultPage() {
     return (
-        <div className ="searchpage">
+        <div className ="resultpage">
         </div>
     );
 }
 
-export default SearchPage;
+export default ResultPage;

@@ -4,8 +4,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import HomePage from './views/HomePage';
-import SearchPage from './views/SearchPage';
 import Template from './views/Template';
+import NavigationBar from './components/NavigationBar';
+import ResultPage from './views/ResultPage';
+import "./styles.css";
 
 function App() {
 
@@ -15,8 +17,8 @@ function App() {
       element: <HomePage />,
     },
     {
-      path: "searchpage",
-      element: <SearchPage />,
+      path: "results",
+      element: <ResultPage />,
     },
     {
       path: "template",
@@ -24,12 +26,9 @@ function App() {
     },
   ])
 
-  const mainStyling = {
-    display: "flex",
-  }
-
   return (
-    <div style={mainStyling}>
+    <div className="mainStyling">
+      <NavigationBar />
       <RouterProvider router={router}/>
     </div>
   );
