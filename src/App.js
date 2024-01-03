@@ -9,6 +9,7 @@ import NavigationBar from './components/NavigationBar';
 import ResultPage from './views/ResultPage';
 import "./styles.css";
 import DetailsPage from './views/DetailsPage';
+import FAQPage from './views/FAQPage';
 
 function App() {
 
@@ -24,6 +25,10 @@ function App() {
     {
       path: "details",
       element: <DetailsPage />,
+    },
+    {
+      path: "faq",
+      element: <FAQPage />,
     },
   ])
 
