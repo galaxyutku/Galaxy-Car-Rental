@@ -122,9 +122,6 @@
     padding-top: 20%;
 }
 
-.extraDetailsHeader{
-    
-}
 .listExtraContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
