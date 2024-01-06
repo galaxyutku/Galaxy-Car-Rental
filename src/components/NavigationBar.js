@@ -43,13 +43,21 @@ function NavigationBar() {
                     (auth.currentUser.email != "admin@gmail.com")
                     ?
                     (
+                        <>
+                        <Button variant="text" style={{ color: "white", marginRight: 20 }}>
+                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit' }}>FAQ</Link>
+                        </Button>
                         <Button onClick={handleSignOut} variant="text" style={{ color: "white" }}>
                             SIGN OUT
                         </Button>
+                        </>
                     )
                     :
                     (
                     <>
+                        <Button variant="text" style={{ color: "white", marginRight: 20 }}>
+                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit' }}>FAQ</Link>
+                        </Button>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
                             <Link to="/adminpanel" style={{ textDecoration: 'none', color: 'inherit' }}>ADMIN PANEL</Link>
                         </Button>
@@ -60,6 +68,9 @@ function NavigationBar() {
                     )
                 ) : ( // If user is not authenticated, show login and signup buttons
                     <>
+                        <Button variant="text" style={{ color: "white", marginRight: 20 }}>
+                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit' }}>FAQ</Link>
+                        </Button>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
                             <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>LOGIN</Link>
                         </Button>
