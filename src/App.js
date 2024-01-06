@@ -16,6 +16,7 @@ import AdminPanel from './views/AdminPanel';
 import {auth} from "./utils/firebaseConfig";
 import {onAuthStateChanged } from "firebase/auth";
 
+import FAQPage from './views/FAQPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -41,6 +42,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/template" element={<Template />} />
+          <Route path="/FAQPage" element={<FAQPage />} />
           {
             (user != null) ? (
               (user?.email == "admin@gmail.com")

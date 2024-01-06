@@ -1,41 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Roboto+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Roboto+Condensed&display=swap");
 
-.mainStyling{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+.mainStyling {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
-.homepage{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    height: 100%;
+.homepage {
+  display: flex;
+  /* justify-content: center; */
+  text-align: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
-.logoStyling{
-    text-decoration: none;
-    font-size: 3em;
-    color: white;
-    font-family: 'Kaushan Script', cursive;
-    padding: 10px 20px;
+.logoStyling {
+  text-decoration: none;
+  font-size: 3em;
+  color: white;
+  font-family: "Kaushan Script", cursive;
+  padding: 10px 20px;
 }
-.navbarStyling{
-    display: flex;
-    padding: 0px 200px;
-    height: 70;
-    background-color: #1440eb;
-    font-family: 'Roboto Condensed', sans-serif;
-    z-index: 1000000;
+.navbarStyling {
+  display: flex;
+  padding: 0px 200px;
+  height: 70;
+  background-color: #1440eb;
+  font-family: "Roboto Condensed", sans-serif;
+  z-index: 1000000;
 }
-.searchContainer{
-    display: flex;
-    width: auto;
-    height: 50%;
-    background-color: #1E70E1;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 30px;
+.searchContainer {
+  display: flex;
+  width: auto;
+  height: 50%;
+  background-color: #1e70e1;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 30px;
 }
 .resultpage{
     width: fit-content;
@@ -65,12 +66,12 @@
     border: 1px solid rgba(131, 131, 131, 0.3);
     box-shadow: 1px 1px rgba(131, 131, 131, 0.3);
 }
-.detailsPage{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+.detailsPage {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 .detailsContainer{
     display: flex;
@@ -200,4 +201,118 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.faqstyling {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.featuresContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.feature img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.feature h3 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.feature p {
+  font-size: 0.9em;
+  color: #555;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: #eb1463;
+  }
+  50% {
+    background-color: #1463eb; /* Or any other color you wish to transition to */
+  }
+  100% {
+    background-color: #eb1463;
+  }
+}
+
+.headerSearchContainer {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 20px;
+  animation: colorChange 10s infinite; /* Change '10s' to the duration you want */
+}
+
+.headerTitles h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.headerSubtitles span {
+  display: inline-block;
+  margin-right: 15px; /* Adjust spacing as needed */
+}
+.faqstyling {
+  position: relative;
+  background-image: url(/public/sb5.PNG);
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* styles.css */
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.faqstyling {
+  animation: slideDown 0.5s ease-out forwards;
+}
+/* Slide-in animasyonu için anahtar kareler */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animasyonu uygulayacağınız sınıf */
+.slide-in {
+  opacity: 0; /* Başlangıç durumunda metni görünmez yap */
+  animation: slideInFromLeft 0.8s ease forwards 0.6s; /* Animasyonu 2 saniye sonra başlat */
 }
