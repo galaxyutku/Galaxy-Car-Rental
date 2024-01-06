@@ -85,27 +85,26 @@ const faqData = [
 
 function FAQPage() {
   return (
-    <div className="faqstyling">
-      <img src="/sb5.png" alt="Arka Plan" className="background-image" />
+    <div
+      className="faqstyling"
+      style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/sb5.png)` }}
+    >
       <div
         style={{
           display: "flex",
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          position:"absolute",
           width: "30%",
-          height: "100%",
+          height: "auto",
           marginTop: "5rem",
           flexDirection: "column",
+          position: "absolute", // You might want to adjust this if it's not positioning as you want
+          left: "35%", // Adjust as needed for your layout
+          top: "0", // Start at the top of the page
         }}
       >
         <Typography
           variant="h4"
           className="slide-in"
           style={{
-            marginBottom: "20px",
-            position: "relative", // position özelliği z-index ile birlikte kullanılmalı
-            zIndex: 2, // Diğer elementlerden yüksek bir z-index değeri
             color: "white",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
             marginBottom: "20px",
@@ -116,7 +115,6 @@ function FAQPage() {
         >
           Frequently Asked Questions
         </Typography>
-
         {faqData.map((item, index) => (
           <Accordion key={index}>
             <AccordionSummary
