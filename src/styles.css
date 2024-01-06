@@ -149,16 +149,16 @@
   margin-right: 15px; /* Adjust spacing as needed */
 }
 .faqstyling {
-  position: relative; /* Pozisyon ayarlamalarını etkinleştirir */
+  position: relative;
+  background-image: url(/public/sb5.PNG);
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-.background-image {
-  position: absolute; /* Resmi mutlak pozisyona yerleştirir */
-  width: 100%; /* Genişliği kapsayıcıya uyarlar */
-  height: 100%; /* Yüksekliği kapsayıcıya uyarlar */
-  /* Resmi içeriklerin arkasına alır */
-  object-fit: cover; /* Resmin orantısını koruyarak kutuyu doldurmasını sağlar */
-}
 /* styles.css */
 
 @keyframes slideDown {

@@ -85,32 +85,20 @@ const faqData = [
 
 function FAQPage() {
   return (
-    <div
-      className="faqstyling"
-      style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/sb5.png)` }}
-    >
-      <div
-        style={{
-          display: "flex",
-          width: "30%",
-          height: "auto",
-          marginTop: "5rem",
-          flexDirection: "column",
-          position: "absolute", // You might want to adjust this if it's not positioning as you want
-          left: "35%", // Adjust as needed for your layout
-          top: "0", // Start at the top of the page
-        }}
-      >
+    <div className="faqstyling">
+      {/* Arka plan resmi için img tag'ı artık gerekli değil, çünkü arka plan CSS içinde ayarlandı */}
+      <div className="slide-in">
+        {" "}
+        {/* Animasyon uygulanacaksa */}
         <Typography
           variant="h4"
-          className="slide-in"
           style={{
+            marginBottom: "20px",
             color: "white",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
-            marginBottom: "20px",
-            background: "rgba(0, 0, 0, 0.5)",
             padding: "10px",
             borderRadius: "5px",
+            background: "rgba(0, 0, 0, 0.5)",
           }}
         >
           Frequently Asked Questions
