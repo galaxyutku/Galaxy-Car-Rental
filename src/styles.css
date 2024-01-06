@@ -37,27 +37,27 @@
     padding: 0px 30px;
 }
 .resultpage{
-    width: 100%;
-    height: 100%;
+    width: fit-content;
+    height: fit-content;
     display: flex;
     gap: 30px;
     flex-direction: row;
+    justify-content: center;
     margin-top: 30px;
 }
 .filterBar{
     width: 15%;
-    height: 80%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     gap:5px;
     border: 1px gray solid;
-    margin-left: 25px;
 }
 .cardContainer{
     padding: 50px;
     width: auto;
     max-width: 75%;
-    height: 100%;
+    height: 95%;
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
@@ -76,4 +76,16 @@
     width: auto;
     height: auto;
     border: 1px gray solid;
+}
+.loginStyling{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.loginContainer{
+    width: 600px;
+    height: 700px;
+    background-color: red;
 }
