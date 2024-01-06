@@ -90,8 +90,12 @@ function FAQPage() {
       <div
         style={{
           display: "flex",
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position:"absolute",
           width: "30%",
-          height: "auto",
+          height: "100%",
+          marginTop: "5rem",
           flexDirection: "column",
         }}
       >
