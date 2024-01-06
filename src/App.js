@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,8 +14,22 @@ import LoginPage from './views/LoginPage';
 import SignupPage from './views/SignupPage';
 import AdminPanel from './views/AdminPanel';
 import {auth} from "./utils/firebaseConfig";
+import {onAuthStateChanged } from "firebase/auth";
+
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const admincheck = onAuthStateChanged(auth, (currentUser) => {
+        // Update user state based on authentication status
+        setUser(currentUser);
+    });
+    return () => {
+      admincheck();
+  };
+}, [auth]);
+
   return (
     <div className="mainStyling">
       <Router>
@@ -28,15 +42,19 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/template" element={<Template />} />
           {
-            (auth.currentUser.email != "admin@gmail.com")
-            ?
-            (
-              null
+            (user != null) ? (
+              (user?.email == "admin@gmail.com")
+              ?
+              (
+                <Route path="/adminpanel" element={<AdminPanel />} />
+              )
+              :
+              (
+                null
+              )
             )
             :
-            (
-              <Route path="/adminpanel" element={<AdminPanel />} />
-            )
+            null
           }
         </Routes>
       </Router>
