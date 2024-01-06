@@ -26,6 +26,7 @@
     height: 70;
     background-color: #1440eb;
     font-family: 'Roboto Condensed', sans-serif;
+    z-index: 1000000;
 }
 .searchContainer{
     display: flex;
@@ -73,6 +74,7 @@
 }
 .detailsContainer{
     display: flex;
+    flex-direction: row;
     width: auto;
     height: auto;
     border: 1px gray solid;
@@ -88,4 +90,114 @@
     width: 600px;
     height: 700px;
     background-color: red;
+}
+.leftItems{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    gap: 2rem;
+}
+
+.rightItems{
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+    padding: 1%;
+}
+
+
+.carCard{
+    width: 100%;
+    height: 100%;
+}
+.carDetails{
+    display: flex;
+    flex-direction: row;
+}
+
+.carFeaturesName{
+    font-weight: bold;
+}
+
+.carPicture{
+    height: 80%;
+    width: 100%;
+}
+
+.carFeatures {
+    display: grid;
+    grid-template-rows: auto auto; 
+    gap: 6%; 
+  }
+
+.downFeatures{
+    padding-top: 20%;
+}
+
+.listExtraContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5%;
+    padding: 0;
+  }
+  
+.listExtraContainer li {
+    display: flex;
+    width: 75%;
+    list-style-type: none;
+    padding: 4%;
+    gap: 1%;
+  }
+
+.upExtra{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+  }
+
+.extrasPicture{
+    width: 20%;
+    height: 20%;
+  }
+  
+.pickupReturn{
+    display: flex;
+    flex-direction: column;
+}
+
+.pickupInformation, 
+.returnInformation{
+    padding: 5%;
+}
+
+.pickupHeader{
+    font-weight: bold;
+    padding-right: 1%;
+}
+
+.arrow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rentPayment {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+  }
+  
+  .rentPayment span {
+    text-align: left; 
+  }
+  
+  .rentPayment span:last-child {
+    text-align: right; 
+  }
+  
+.bookButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
