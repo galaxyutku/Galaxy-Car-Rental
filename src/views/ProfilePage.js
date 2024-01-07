@@ -110,6 +110,7 @@ function ProfilePage() {
         id: index,
         firstName: currentUserData.userName, // Replace these fields with your actual rentData properties
         lastName: currentUserData.userSurname,
+        userMail: currentUserData.userMail,
         pickupDate: String(rentItem.rentBetween).split("-")[0],
         dropoffDate: String(rentItem.rentBetween).split("-")[1],
         location: selectedCarData ? selectedCarData.location : '', // Check if selectedCarData is not null
