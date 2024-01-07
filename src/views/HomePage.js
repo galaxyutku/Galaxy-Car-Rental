@@ -1,19 +1,109 @@
 import React, { useEffect, useState } from "react";
 import "../styles.css";
-import { Autocomplete, Button, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Snackbar,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { Places } from "../const/Places";
+import AlertComponent from "../components/AlertComponent";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function HomePage() {
-  const Places = ["hi", "hello"];
   const navigate = useNavigate();
   const [pickupPlace, setPickupPlace] = useState("");
   const [pickupDate, setPickupDate] = useState(null);
   const [dropoffDate, setDropoffDate] = useState(null);
+  const [errorStatus, setErrorStatus] = useState(false); // Changed initial state to false
+  const [errorMessage, setErrorMessage] = useState("");
+  const [alertType, setAlertType] = useState("error");
+  const [errorDetail, setErrorDetail] = useState("");
+
+  const currentDate = new Date();
+
+  const searchHandle = () => {
+    // console.log(Number(String(pickupDate).split(" ")[1]) + 1);
+    // console.log(Number(String(dropoffDate).split(" ")[1]) + 1);
+    // Check if pickupDate and dropoffDate is filled
+    if (pickupDate === null || dropoffDate === null) {
+      setErrorMessage("You have to select pick-up date and drop-off date.");
+      setAlertType("warning");
+      setErrorStatus(true);
+      setErrorDetail("warning-error");
+    }
+    // Check if pickupDate and dropoffDate are on the same day
+    else if (String(pickupDate) == String(dropoffDate)) {
+      setErrorMessage("You can not select same day.");
+      setAlertType("warning");
+      setErrorStatus(true);
+      setErrorDetail("warning-error");
+    }
+    // Check if pickupDate or dropoffDate is the current date
+    else if (
+      Number(String(pickupDate).split(" ")[1]) + 1 <=
+        Number(String(currentDate).split(" ")[2]) ||
+      Number(String(dropoffDate).split(" ")[1]) + 1 <=
+        Number(String(currentDate).split(" ")[2])
+    ) {
+      setErrorMessage("You can not select current day or past days.");
+      setAlertType("warning");
+      setErrorStatus(true);
+      setErrorDetail("warning-error");
+    }
+    // Check if pickup date is before of dropoffdate
+    else if (
+      Number(String(pickupDate).split(" ")[1]) + 1 >
+      Number(String(dropoffDate).split(" ")[1]) + 1
+    ) {
+      setErrorMessage("Pickup Date can not be before Drop-off Date.");
+      setAlertType("warning");
+      setErrorStatus(true);
+      setErrorDetail("warning-error");
+    }
+    // If none of the above conditions are met, navigate to "/results"
+    else {
+      navigate("/results", {
+        state: {
+          pickupPlace: { pickupPlace },
+          pickupDate: { pickupDate },
+          dropoffDate: { dropoffDate },
+        },
+      });
+    }
+  };
+
   return (
     <div className="homepage">
+      {errorStatus ? (
+        <Stack>
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            open={errorStatus}
+            autoHideDuration={4500}
+            onClose={() => {
+              setErrorStatus(false);
+            }}
+          >
+            <div>
+              <AlertComponent
+                AlertType={alertType}
+                errorMessage={errorMessage}
+                errorDetail={errorDetail}
+              />
+            </div>
+          </Snackbar>
+        </Stack>
+      ) : null}
       <div className="searchContainer">
         <div
           style={{
@@ -119,15 +209,7 @@ function HomePage() {
             </LocalizationProvider>
           </div>
           <Button
-            onClick={() =>
-              navigate("/results", {
-                state: {
-                  pickupPlace: { pickupPlace },
-                  pickupDate: { pickupDate },
-                  dropoffDate: { dropoffDate },
-                },
-              })
-            }
+            onClick={searchHandle}
             style={{
               backgroundColor: "white",
               width: "120px",
@@ -177,8 +259,8 @@ function HomePage() {
           <h1>Car Rental – Search, Compare & Save</h1>
           <div className="headerSubtitles">
             <span>✓ Free cancellations on most bookings</span>
-            <span>✓ 60,000+ locations</span>
-            <span>✓ Customer support in 40+ languages</span>
+            <span>✓ 81 City Of Turkey</span>
+            <span>✓ Customer support</span>
           </div>
         </div>
       </div>

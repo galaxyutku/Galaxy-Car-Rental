@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -12,53 +12,39 @@ import './styles.css';
 import DetailsPage from './views/DetailsPage';
 import LoginPage from './views/LoginPage';
 import SignupPage from './views/SignupPage';
-import AdminPanel from './views/AdminPanel';
-import {auth} from "./utils/firebaseConfig";
-import {onAuthStateChanged } from "firebase/auth";
-
 import FAQPage from './views/FAQPage';
+import PrivateRoute from './components/PrivateRoute';
+import ForbiddenPage from './views/ForbiddenPage';
+import ProfilePage from './views/ProfilePage';
+import AdminPanelCreateCar from './views/Admin/AdminPanelCreateCar';
+import AdminPanel from './views/Admin/AdminPanel';
+import AdminPanelDeleteCar from './views/Admin/AdminPanelDeleteCar';
+import AdminPanelUpdateCar from './views/Admin/AdminPanelUpdateCar';
+import AdminPanelBookingManagement from './views/Admin/AdminPanelBookingManagement';
+import AdminPanelUserManagement from './views/Admin/AdminPanelUserManagement';
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const admincheck = onAuthStateChanged(auth, (currentUser) => {
-        // Update user state based on authentication status
-        setUser(currentUser);
-    });
-    return () => {
-      admincheck();
-  };
-}, [auth]);
-
   return (
     <div className="mainStyling">
       <Router>
-      <NavigationBar />
+        <NavigationBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/results" element={<ResultPage />} />
           <Route path="/details" element={<DetailsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
           <Route path="/template" element={<Template />} />
           <Route path="/FAQPage" element={<FAQPage />} />
-          {
-            (user != null) ? (
-              (user?.email == "admin@gmail.com")
-              ?
-              (
-                <Route path="/adminpanel" element={<AdminPanel />} />
-              )
-              :
-              (
-                null
-              )
-            )
-            :
-            null
-          }
+          <Route path="/forbidden" element={<ForbiddenPage />} />
         </Routes>
+        <PrivateRoute path="/profile" element={<ProfilePage />} />
+        <PrivateRoute path="/login" element={<LoginPage />} />
+        <PrivateRoute path="/signup" element={<SignupPage />} />
+        <PrivateRoute path="/adminpanel/createcar" element={<AdminPanelCreateCar />}/>
+        <PrivateRoute path="/adminpanel/deletecar" element={<AdminPanelDeleteCar />}/>
+        <PrivateRoute path="/adminpanel/updatecar" element={<AdminPanelUpdateCar />}/>
+        <PrivateRoute path="/adminpanel/usermanagement" element={<AdminPanelUserManagement />}/>
+        <PrivateRoute path="/adminpanel/bookingmanagement" element={<AdminPanelBookingManagement />}/>
+        <PrivateRoute path="/adminpanel" element={<AdminPanel />}/>
       </Router>
     </div>
   );

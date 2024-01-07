@@ -82,14 +82,16 @@ const faqData = [
     ),
   },
 ];
-
 function FAQPage() {
+  const [expandedAccordion, setExpandedAccordion] = useState(null);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpandedAccordion(isExpanded ? panel : null);
+  };
+
   return (
     <div className="faqstyling">
-      {/* Arka plan resmi için img tag'ı artık gerekli değil, çünkü arka plan CSS içinde ayarlandı */}
       <div className="slide-in">
-        {" "}
-        {/* Animasyon uygulanacaksa */}
         <Typography
           variant="h4"
           style={{
@@ -104,7 +106,11 @@ function FAQPage() {
           Frequently Asked Questions
         </Typography>
         {faqData.map((item, index) => (
-          <Accordion key={index}>
+          <Accordion
+            key={index}
+            expanded={expandedAccordion === `panel${index}a`}
+            onChange={handleChange(`panel${index}a`)}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls={`panel${index}a-content`}
