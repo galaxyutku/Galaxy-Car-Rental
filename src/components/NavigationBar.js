@@ -45,7 +45,10 @@ function NavigationBar() {
                     (
                         <>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
-                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit' }}>FAQ</Link>
+                            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>PROFILE</Link>
+                        </Button>
+                        <Button variant="text" style={{ color: "white", marginRight: 20 }}>
+                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>FAQ</Link>
                         </Button>
                         <Button onClick={handleSignOut} variant="text" style={{ color: "white" }}>
                             SIGN OUT
@@ -56,10 +59,13 @@ function NavigationBar() {
                     (
                     <>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
-                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit' }}>FAQ</Link>
+                            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>PROFILE</Link>
                         </Button>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
-                            <Link to="/adminpanel" style={{ textDecoration: 'none', color: 'inherit' }}>ADMIN PANEL</Link>
+                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>FAQ</Link>
+                        </Button>
+                        <Button variant="text" style={{ color: "white", marginRight: 20 }}>
+                            <Link to="/adminpanel" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>ADMIN PANEL</Link>
                         </Button>
                         <Button onClick={handleSignOut} variant="text" style={{ color: "white" }}>
                             SIGN OUT
@@ -69,13 +75,13 @@ function NavigationBar() {
                 ) : ( // If user is not authenticated, show login and signup buttons
                     <>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
-                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit' }}>FAQ</Link>
+                            <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>FAQ</Link>
                         </Button>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
-                            <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>LOGIN</Link>
+                            <Link to="/login" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>LOGIN</Link>
                         </Button>
                         <Button variant="text" style={{ color: "white" }}>
-                            <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit' }}>SIGNUP</Link>
+                            <Link to="/signup" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>SIGNUP</Link>
                         </Button>
                     </>
                 )}
