@@ -10,6 +10,12 @@ export const bookingColumns = [
         `${params.row.firstName || ""} ${params.row.lastName || ""}`,
     },
     {
+      field: "userMail",
+      headerName: "User E-mail",
+      width: 110,
+      editable: false,
+    },
+    {
       field: "pickupDate",
       headerName: "Pickup Date",
       width: 110,
