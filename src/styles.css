@@ -64,8 +64,6 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    border: 1px solid rgba(131, 131, 131, 0.3);
-    box-shadow: 1px 1px rgba(131, 131, 131, 0.3);
 }
 .detailsPage {
   display: flex;
@@ -121,8 +119,8 @@
 }
 
 .carPicture{
-    height: 80%;
-    width: 100%;
+    height: 20vh;
+    width: 40vh;
 }
 
 .carFeatures {

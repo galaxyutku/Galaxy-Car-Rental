@@ -29,9 +29,14 @@ function HomePage() {
   const [alertType, setAlertType] = useState("error");
   const [errorDetail, setErrorDetail] = useState("");
 
-  const currentDate = new Date();
-
+  const currentDate = dayjs(new Date()).format("DD/MM/YYYY");
   const searchHandle = () => {
+    // if(pickupDate)
+    //   setPickupValue(Number(String(pickupDate).split("/")[0]) + (Number(String(pickupDate).split("/")[1]) * 30) + (Number(String(pickupDate).split("/")[2]) * 360));
+    // if(dropoffDate)
+    //   setDropoffValue(Number(String(dropoffDate).split("/")[0]) + (Number(String(dropoffDate).split("/")[1]) * 30) + (Number(String(dropoffDate).split("/")[2]) * 360));
+    // if(currentDate)
+    //   setCurrentDateValue(Number(String(currentDate).split("/")[0]) + (Number(String(currentDate).split("/")[1]) * 30) + (Number(String(currentDate).split("/")[2]) * 360));
     // console.log(Number(String(pickupDate).split(" ")[1]) + 1);
     // console.log(Number(String(dropoffDate).split(" ")[1]) + 1);
     // Check if pickupDate and dropoffDate is filled
@@ -50,10 +55,7 @@ function HomePage() {
     }
     // Check if pickupDate or dropoffDate is the current date
     else if (
-      Number(String(pickupDate).split(" ")[1]) + 1 <=
-        Number(String(currentDate).split(" ")[2]) ||
-      Number(String(dropoffDate).split(" ")[1]) + 1 <=
-        Number(String(currentDate).split(" ")[2])
+      ((Number(String(dropoffDate).split("/")[0]) + (Number(String(dropoffDate).split("/")[1]) * 30) + (Number(String(dropoffDate).split("/")[2]) * 360)) <= (Number(String(currentDate).split("/")[0]) + (Number(String(currentDate).split("/")[1]) * 30) + (Number(String(currentDate).split("/")[2]) * 360)) || (Number(String(pickupDate).split("/")[0]) + (Number(String(pickupDate).split("/")[1]) * 30) + (Number(String(pickupDate).split("/")[2]) * 360)) <= (Number(String(currentDate).split("/")[0]) + (Number(String(currentDate).split("/")[1]) * 30) + (Number(String(currentDate).split("/")[2]) * 360)))
     ) {
       setErrorMessage("You can not select current day or past days.");
       setAlertType("warning");
@@ -62,8 +64,8 @@ function HomePage() {
     }
     // Check if pickup date is before of dropoffdate
     else if (
-      Number(String(pickupDate).split(" ")[1]) + 1 >
-      Number(String(dropoffDate).split(" ")[1]) + 1
+      (Number(String(pickupDate).split("/")[0]) + (Number(String(pickupDate).split("/")[1]) * 30) + (Number(String(pickupDate).split("/")[2]) * 360)) >=
+      (Number(String(dropoffDate).split("/")[0]) + (Number(String(dropoffDate).split("/")[1]) * 30) + (Number(String(dropoffDate).split("/")[2]) * 360))
     ) {
       setErrorMessage("Pickup Date can not be before Drop-off Date.");
       setAlertType("warning");
@@ -84,26 +86,24 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      {errorStatus ? (
-        <Stack>
-          <Snackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            open={errorStatus}
-            autoHideDuration={4500}
-            onClose={() => {
-              setErrorStatus(false);
-            }}
-          >
-            <div>
-              <AlertComponent
-                AlertType={alertType}
-                errorMessage={errorMessage}
-                errorDetail={errorDetail}
-              />
-            </div>
-          </Snackbar>
-        </Stack>
-      ) : null}
+      <Stack>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          open={errorStatus}
+          autoHideDuration={2400}
+          onClose={() => {
+            setErrorStatus(false);
+          }}
+        >
+          <div>
+            <AlertComponent
+              AlertType={alertType}
+              errorMessage={errorMessage}
+              errorDetail={errorDetail}
+            />
+          </div>
+        </Snackbar>
+      </Stack>
       <div className="searchContainer">
         <div
           style={{
@@ -173,7 +173,7 @@ function HomePage() {
                 }}
                 label="Pickup Date"
                 onChange={(newValue) => {
-                  setPickupDate(newValue);
+                  setPickupDate(dayjs(newValue.$d).format("DD/MM/YYYY"));
                 }}
               />
             </LocalizationProvider>
@@ -203,7 +203,7 @@ function HomePage() {
                 }}
                 label="Drop off Date"
                 onChange={(newValue) => {
-                  setDropoffDate(newValue);
+                  setDropoffDate(dayjs(newValue.$d).format("DD/MM/YYYY"));
                 }}
               />
             </LocalizationProvider>

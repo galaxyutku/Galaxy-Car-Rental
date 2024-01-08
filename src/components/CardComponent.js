@@ -31,6 +31,8 @@ function CardComponent({
     <div>
       <Card
         onClick={() => {
+          console.log(pickupDate);
+          console.log(dropoffDate);
           navigate("/details", {
             state: {
               pickupPlace: {pickupPlace},
@@ -42,7 +44,8 @@ function CardComponent({
               dailyPrice:  {dailyPrice} ,
               carImageRef:  {carImageRef} ,
               choosedPickupPlace: {choosedPickupPlace},
-              carHashID: {carHashID}
+              carHashID: {carHashID},
+              carImageRef: {carImageRef}
             }
           });
         }}
@@ -50,7 +53,7 @@ function CardComponent({
           display: "flex",
           flexWrap: "row",
           justifyContent: "center",
-          width: "100%",
+          width: "45vh",
           height: 330,
           border: "1px gray solid",
           "&:hover": {
@@ -65,13 +68,13 @@ function CardComponent({
           component="img"
           image={carImageRef}
           alt="Car Image"
-          sx={{ maxWidth: "25vh", objectFit: "cover" }}
+          sx={{ maxWidth: "20vh", objectFit: "cover" }}
         />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            maxWidth: "25vh",
+            width: "35vh",
             fontSize: "1vw",
             justifyContent: "center",
             textAlign: "center",

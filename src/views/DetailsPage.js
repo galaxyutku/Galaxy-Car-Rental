@@ -98,7 +98,7 @@ function DetailsPage() {
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             open={errorStatus}
-            autoHideDuration={3000}
+            autoHideDuration={1500}
             onClose={() => {
               setErrorStatus(false);
               navigate("/profile");
@@ -131,7 +131,7 @@ function DetailsPage() {
                       <Divider />
                     </Typography>
                     <img
-                      src={require("../assets/car_1.png")}
+                      src={location.state.carImageRef.carImageRef}
                       className="carPicture"
                     ></img>
                   </div>
@@ -192,21 +192,6 @@ function DetailsPage() {
                           Daily Price:
                         </span>{" "}
                         {location.state.dailyPrice.dailyPrice} $
-                      </Typography>
-                      <Typography
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "left",
-                          alignItems: "center",
-                          gap: 0.5,
-                        }}
-                      >
-                        <PaidOutlinedIcon fontSize="large" />
-                        <span className="carFeaturesName">
-                          Weekly Price:
-                        </span>{" "}
-                        {location.state.dailyPrice.dailyPrice * 6} $
                       </Typography>
                     </div>
                   </div>
@@ -363,7 +348,7 @@ function DetailsPage() {
             </Grid>
           </div>
           <div className="bookButton">
-            <Button
+            {auth.currentUser ? <Button
               variant="contained"
               sx={{
                 backgroundColor: "#ffa42c",
@@ -381,6 +366,8 @@ function DetailsPage() {
             >
               BOOK NOW
             </Button>
+            :
+            null}
           </div>
           <div className="rightDownItems"></div>
         </div>

@@ -11,6 +11,8 @@ import {
   DialogContentText,
   DialogTitle,
   Divider,
+  Snackbar,
+  Stack,
 } from "@mui/material";
 import { DataGrid, useGridApiRef } from "@mui/x-data-grid";
 import { bookingColumns } from "../const/DataListColumns";
@@ -19,6 +21,7 @@ import { doc, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { auth } from "../utils/firebaseConfig";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
+import AlertComponent from "../components/AlertComponent";
 
 function ProfilePage() {
   const apiRef = useGridApiRef();
@@ -74,11 +77,24 @@ function ProfilePage() {
   const handleRentCancellation = () => {
     const selectedRows = apiRef.current.getSelectedRows();
     const iterSet = new Set(selectedRows.entries()).values();
-    for (const v of iterSet) {
-      deleteUser(v[1].rentHash);
-    }
+    const iterArray = Array.from(iterSet);
+    iterArray.map((iter)=>{
+      deleteUser(iter[1].rentHash);
+    });
     setOpen(false);
   };
+
+  const checkIfDataSelected = () => {
+    const selectedRows = apiRef.current.getSelectedRows();
+    const iterSet = new Set(selectedRows.entries()).values();
+    const iterArray = Array.from(iterSet);
+    if(iterArray.length == 0){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
 
   // Handle the current user informations from database and find according rent data on database.
   const handleCurrentUserData = () => {
@@ -136,6 +152,24 @@ function ProfilePage() {
         gap: 20,
       }}
     >
+      <Stack>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          open={errorStatus}
+          autoHideDuration={1500}
+          onClose={() => {
+            setErrorStatus(false);
+          }}
+        >
+          <div>
+            <AlertComponent
+              AlertType={alertType}
+              errorMessage={errorMessage}
+              errorDetail={errorDetail}
+            />
+          </div>
+        </Snackbar>
+      </Stack>
       <Dialog
         open={open}
         onClose={() => {
@@ -149,7 +183,7 @@ function ProfilePage() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to cancel your car renting booking.
+            Are you sure you want to cancel your car renting booking?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -199,7 +233,15 @@ function ProfilePage() {
         color="error"
         startIcon={<DeleteIcon />}
         onClick={() => {
-          setOpen(true);
+          if(checkIfDataSelected()){
+            setOpen(true);
+          }
+          else{
+            setErrorDetail("warning-message");
+            setErrorMessage("You have to select something to interact!");
+            setAlertType("warning");
+            setErrorStatus(true);
+          }
         }}
       >
         CANCEL RENT

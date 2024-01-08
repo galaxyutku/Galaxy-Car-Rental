@@ -11,6 +11,8 @@ import {
   DialogContentText,
   DialogTitle,
   Divider,
+  Snackbar,
+  Stack,
 } from "@mui/material";
 import { DataGrid, useGridApiRef } from "@mui/x-data-grid";
 import { carColumns } from "../../const/DataListColumns";
@@ -19,12 +21,17 @@ import { doc, collection, getDocs, deleteDoc } from "firebase/firestore";
 import { auth } from "../../utils/firebaseConfig";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
+import AlertComponent from "../../components/AlertComponent";
 
 function AdminPanelDeleteCar() {
   const apiRef = useGridApiRef();
   const [open, setOpen] = useState(false);
   const [carData, setCarData] = useState();
   const [rentData, setRentData] = useState();
+  const [errorStatus, setErrorStatus] = useState(false); // Changed initial state to false
+  const [errorMessage, setErrorMessage] = useState("");
+  const [alertType, setAlertType] = useState("error");
+  const [errorDetail, setErrorDetail] = useState("");
 
   const carCollectionRef = collection(db, "car-data");
   const rentCollectionRef = collection(db, "rent-status");
@@ -70,6 +77,18 @@ function AdminPanelDeleteCar() {
       }
     };
   
+    const checkIfDataSelected = () => {
+      const selectedRows = apiRef.current.getSelectedRows();
+      const iterSet = new Set(selectedRows.entries()).values();
+      const iterArray = Array.from(iterSet);
+      if(iterArray.length == 0){
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+
     const handleCarDeletion = () => {
       const selectedRows = apiRef.current.getSelectedRows();
       const iterSet = new Set(selectedRows.entries()).values();
@@ -92,6 +111,24 @@ function AdminPanelDeleteCar() {
         gap: 20,
       }}
     >
+      <Stack>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          open={errorStatus}
+          autoHideDuration={1500}
+          onClose={() => {
+            setErrorStatus(false);
+          }}
+        >
+          <div>
+            <AlertComponent
+              AlertType={alertType}
+              errorMessage={errorMessage}
+              errorDetail={errorDetail}
+            />
+          </div>
+        </Snackbar>
+      </Stack>
       <Dialog
         open={open}
         onClose={() => {
@@ -105,7 +142,7 @@ function AdminPanelDeleteCar() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to cancel your car renting booking.
+            Are you sure you want to delete car?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -156,7 +193,15 @@ function AdminPanelDeleteCar() {
         color="error"
         startIcon={<DeleteIcon />}
         onClick={() => {
-          setOpen(true);
+          if(checkIfDataSelected()){
+            setOpen(true);
+          }
+          else{
+            setErrorDetail("warning-message");
+            setErrorMessage("You have to select something to interact!");
+            setAlertType("warning");
+            setErrorStatus(true);
+          }
         }}
       >
         DELETE CARS
