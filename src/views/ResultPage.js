@@ -30,26 +30,9 @@ function ResultPage() {
   const [choosedPickupPlace, setChoosedPickupPlace] = useState(
     location.state.pickupPlace.pickupPlace
   );
-  const choosedPickupDate = new Date(location.state.pickupDate.pickupDate.$d);
-  const choosedDropoffDate = new Date(
-    location.state.dropoffDate.dropoffDate.$d
-  );
-  const formattedPickupDate =
-    ("0" + choosedPickupDate.getDate()).slice(-2) +
-    "/" +
-    ("0" + (choosedPickupDate.getMonth() + 1)).slice(-2) +
-    "/" +
-    choosedPickupDate.getFullYear();
-
-  const formattedDropoffDate =
-    ("0" + choosedDropoffDate.getDate()).slice(-2) +
-    "/" +
-    ("0" + (choosedDropoffDate.getMonth() + 1)).slice(-2) +
-    "/" +
-    choosedDropoffDate.getFullYear();
 
   const allGearTypes = ["Automatic", "Manual"];
-  const allSeatAmounts = [4, 5, 6, 7];
+  const allSeatAmounts = [2, 4, 5];
   const [selectedGearType, setSelectedGearType] = useState("");
   const [selectedSeatAmount, setSelectedSeatAmount] = useState("");
   const [carBrand, setCarBrand] = useState("");
@@ -61,8 +44,6 @@ function ResultPage() {
     const getCarData = async () => {
       const data = await getDocs(carCollectionRef);
       setCarData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log(formattedDropoffDate);
-      console.log(formattedPickupDate);
     };
     getCarData();
   }, []);
@@ -200,8 +181,8 @@ function ResultPage() {
                 seatAmount={car.seatAmount}
                 gearType={car.gearType}
                 dailyPrice={car.dailyPrice}
-                pickupDate={formattedPickupDate}
-                dropoffDate={formattedDropoffDate}
+                pickupDate={location.state.pickupDate.pickupDate}
+                dropoffDate={location.state.dropoffDate.dropoffDate}
                 choosedPickupPlace={choosedPickupPlace}
                 carImageRef={car.carImageRef}
                 carHashID={car.id}

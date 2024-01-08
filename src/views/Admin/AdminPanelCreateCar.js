@@ -15,13 +15,18 @@ import {
   DialogContentText,
   DialogTitle,
   Divider,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
 import { db } from "../../utils/firebaseConfig";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import AlertComponent from "../../components/AlertComponent";
+import { Places } from "../../const/Places";
+import { carBrands } from "../../const/carBrands";
 
 function AdminPanelCreateCar() {
   const [carModel, setCarModel] = useState(""); // State for car model
+  const [carBrand, setCarBrand] = useState("");
   const [dailyPrice, setDailyPrice] = useState(""); // State for daily price
   const [gearType, setGearType] = useState(""); // State for gear type
   const [location, setLocation] = useState(""); // State for location
@@ -52,7 +57,7 @@ function AdminPanelCreateCar() {
       carPlate != ""
     ) {
       await addDoc(carCollectionRef, {
-        carModel: carModel,
+        carModel: carBrand + " " + carModel,
         dailyPrice: Number(dailyPrice),
         gearType: gearType,
         location: location,
@@ -64,6 +69,7 @@ function AdminPanelCreateCar() {
       setErrorDetail("success-message");
       setErrorMessage("You have successfully generated the car data.");
       setErrorStatus(true);
+      window.location.reload(false);
     } else {
       setAlertType("warning");
       setErrorDetail("warning-message");
@@ -93,11 +99,11 @@ function AdminPanelCreateCar() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Booking Cancel Confirmation"}
+          {"Car Create Confirm"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to cancel your car renting booking.
+            Are you sure you want to create car?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -149,11 +155,34 @@ function AdminPanelCreateCar() {
         }}
       >
         <h2>You can use the below button to add rental car.</h2>
-        <Input
-          placeholder="Car Model"
-          value={carModel}
-          onChange={(e) => setCarModel(e.target.value)}
-        />{" "}
+        <Autocomplete
+              disablePortal
+              options={carBrands}
+              sx={{
+                width: "25vh",
+                bgcolor: "white",
+                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                  border: "1px solid #eee",
+                },
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
+                "& .MuiInputLabel-shrink": {
+                  opacity: 0,
+                  transition: "all 0.2s ease-in",
+                },
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Car Brand" />
+              )}
+              onInputChange={(event, newInputValue) => {
+                setCarBrand(newInputValue);
+              }}
+            />
+            <Input
+              placeholder="Car Model"
+              value={carModel}
+              onChange={(e) => setCarModel(e.target.value)}
+            />{" "}
         {/* Controlled input for car model */}
         <Input
           placeholder="Daily Price"
@@ -161,30 +190,84 @@ function AdminPanelCreateCar() {
           onChange={(e) => setDailyPrice(e.target.value)}
         />{" "}
         {/* Controlled input for daily price */}
-        <Input
-          placeholder="Gear Type"
-          value={gearType}
-          onChange={(e) => setGearType(e.target.value)}
-        />{" "}
+        <Autocomplete
+              disablePortal
+              options={["Automatic", "Manual"]}
+              sx={{
+                width: "25vh",
+                bgcolor: "white",
+                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                  border: "1px solid #eee",
+                },
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
+                "& .MuiInputLabel-shrink": {
+                  opacity: 0,
+                  transition: "all 0.2s ease-in",
+                },
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Gear Type" />
+              )}
+              onInputChange={(event, newInputValue) => {
+                setGearType(newInputValue);
+              }}
+            />
         {/* Controlled input for gear type */}
-        <Input
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />{" "}
+        <Autocomplete
+              disablePortal
+              options={Places}
+              sx={{
+                width: "25vh",
+                bgcolor: "white",
+                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                  border: "1px solid #eee",
+                },
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
+                "& .MuiInputLabel-shrink": {
+                  opacity: 0,
+                  transition: "all 0.2s ease-in",
+                },
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Location" />
+              )}
+              onInputChange={(event, newInputValue) => {
+                setLocation(newInputValue);
+              }}
+            />
         {/* Controlled input for location */}
-        <Input
-          placeholder="Seat Amount"
-          value={seatAmount}
-          onChange={(e) => setSeatAmount(e.target.value)}
-        />{" "}
+        <Autocomplete
+              disablePortal
+              options={[2, 4, 5]}
+              sx={{
+                width: "25vh",
+                bgcolor: "white",
+                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                  border: "1px solid #eee",
+                },
+                "& legend": { display: "none" },
+                "& fieldset": { top: 0 },
+                "& .MuiInputLabel-shrink": {
+                  opacity: 0,
+                  transition: "all 0.2s ease-in",
+                },
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Seat Amount" />
+              )}
+              onInputChange={(event, newInputValue) => {
+                setSeatAmount(newInputValue);
+              }}
+            />
         {/* Controlled input for seat amount */}
         <Input
           placeholder="Car Image Link"
           value={carImageRef}
           onChange={(e) => setCarImageRef(e.target.value)}
         />{" "}
-        {/* Controlled input for seat amount */}
+        {/* Controlled input for car Image */}
         <Input
           placeholder="Car Plate"
           value={carPlate}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles.css";
 import { Colors } from "../Colors";
 import Button from '@mui/material/Button';
@@ -7,6 +7,7 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import {auth} from "../utils/firebaseConfig";
 
 function NavigationBar() {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const logout = async () => {
         console.log(auth.currentUser);
@@ -29,6 +30,7 @@ function NavigationBar() {
             .then(() => {
                 // Sign-out successful.
                 setUser(null);
+                navigate('/');
             })
             .catch((error) => {
                 // Handle errors here
