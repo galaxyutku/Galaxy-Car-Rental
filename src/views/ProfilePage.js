@@ -22,6 +22,7 @@ import { auth } from "../utils/firebaseConfig";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../components/AlertComponent";
+import DeleteButton from "../components/DeleteButton";
 
 function ProfilePage() {
   const apiRef = useGridApiRef();
@@ -78,7 +79,7 @@ function ProfilePage() {
     const selectedRows = apiRef.current.getSelectedRows();
     const iterSet = new Set(selectedRows.entries()).values();
     const iterArray = Array.from(iterSet);
-    iterArray.map((iter)=>{
+    iterArray.map((iter) => {
       deleteUser(iter[1].rentHash);
     });
     setOpen(false);
@@ -88,13 +89,12 @@ function ProfilePage() {
     const selectedRows = apiRef.current.getSelectedRows();
     const iterSet = new Set(selectedRows.entries()).values();
     const iterArray = Array.from(iterSet);
-    if(iterArray.length == 0){
+    if (iterArray.length == 0) {
       return false;
-    }
-    else{
+    } else {
       return true;
     }
-  }
+  };
 
   // Handle the current user informations from database and find according rent data on database.
   const handleCurrentUserData = () => {
@@ -115,29 +115,29 @@ function ProfilePage() {
       setCurrentUserData(currentUser);
     }
   };
-  
+
   const rows = currentRentData
-  ? currentRentData.map((rentItem, index) => {
-      const selectedCarData = carData.find(
-        (carItem) => carItem.id === rentItem.carHash
-      );
-      return {
-        rentHash: rentItem.id,
-        id: index,
-        firstName: currentUserData.userName, // Replace these fields with your actual rentData properties
-        lastName: currentUserData.userSurname,
-        userMail: currentUserData.userMail,
-        pickupDate: String(rentItem.rentBetween).split("-")[0],
-        dropoffDate: String(rentItem.rentBetween).split("-")[1],
-        location: selectedCarData ? selectedCarData.location : '', // Check if selectedCarData is not null
-        pricePaid: rentItem.pricePaid,
-        carModel: selectedCarData ? selectedCarData.carModel : '', // Check if selectedCarData is not null
-        gearType: selectedCarData ? selectedCarData.gearType : '', // Check if selectedCarData is not null
-        seatAmount: selectedCarData ? selectedCarData.seatAmount : '', // Check if selectedCarData is not null
-        carPlate: selectedCarData ? selectedCarData.carPlate : '', // Check if selectedCarData is not null
-      };
-    })
-  : [];
+    ? currentRentData.map((rentItem, index) => {
+        const selectedCarData = carData.find(
+          (carItem) => carItem.id === rentItem.carHash
+        );
+        return {
+          rentHash: rentItem.id,
+          id: index,
+          firstName: currentUserData.userName, // Replace these fields with your actual rentData properties
+          lastName: currentUserData.userSurname,
+          userMail: currentUserData.userMail,
+          pickupDate: String(rentItem.rentBetween).split("-")[0],
+          dropoffDate: String(rentItem.rentBetween).split("-")[1],
+          location: selectedCarData ? selectedCarData.location : "", // Check if selectedCarData is not null
+          pricePaid: rentItem.pricePaid,
+          carModel: selectedCarData ? selectedCarData.carModel : "", // Check if selectedCarData is not null
+          gearType: selectedCarData ? selectedCarData.gearType : "", // Check if selectedCarData is not null
+          seatAmount: selectedCarData ? selectedCarData.seatAmount : "", // Check if selectedCarData is not null
+          carPlate: selectedCarData ? selectedCarData.carPlate : "", // Check if selectedCarData is not null
+        };
+      })
+    : [];
 
   return (
     <div
@@ -187,7 +187,7 @@ function ProfilePage() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-        <Button
+          <Button
             variant="contained"
             color="error"
             onClick={() => {
@@ -196,56 +196,64 @@ function ProfilePage() {
           >
             Disagree
           </Button>
-            <Button variant="contained" color="success" onClick={handleRentCancellation} autoFocus>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={handleRentCancellation}
+            autoFocus
+          >
             Agree
           </Button>
         </DialogActions>
       </Dialog>
-      <div style={{width:"fit-content", height:"fit-content", maxHeight:"80%"}}>
-        {currentUserData && carData && userData && ( // Check if currentUserData is not null
-          <>
-            <CardHeader
-              title={`Bookings Details of ${
-                currentUserData.userName + " " + currentUserData.userSurname
-              }`}
-            />
-            <Divider />
-            <DataGrid
-              rows={rows}
-              columns={bookingColumns}
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 5,
+      <div
+        style={{
+          width: "fit-content",
+          height: "fit-content",
+          maxHeight: "80%",
+        }}
+      >
+        {currentUserData &&
+          carData &&
+          userData && ( // Check if currentUserData is not null
+            <>
+              <CardHeader
+                title={`Bookings Details of ${
+                  currentUserData.userName + " " + currentUserData.userSurname
+                }`}
+              />
+              <Divider />
+              <DataGrid
+                rows={rows}
+                columns={bookingColumns}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
+                    },
                   },
-                },
-              }}
-              apiRef={apiRef}
-              pageSizeOptions={[5]}
-              checkboxSelection
-              disableRowSelectionOnClick
-            />
-          </>
-        )}
-        </div>
-      <Button
-        variant="contained"
-        color="error"
-        startIcon={<DeleteIcon />}
+                }}
+                apiRef={apiRef}
+                pageSizeOptions={[5]}
+                checkboxSelection
+                disableRowSelectionOnClick
+              />
+            </>
+          )}
+      </div>
+      <DeleteButton
         onClick={() => {
-          if(checkIfDataSelected()){
+          if (checkIfDataSelected()) {
             setOpen(true);
-          }
-          else{
+          } else {
             setErrorDetail("warning-message");
             setErrorMessage("You have to select something to interact!");
             setAlertType("warning");
             setErrorStatus(true);
           }
         }}
-      >
-        CANCEL RENT
-      </Button>
+        InputText={"Cancel"}
+      />
     </div>
   );
 }

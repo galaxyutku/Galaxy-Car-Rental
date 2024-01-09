@@ -20,6 +20,7 @@ import { collection, addDoc } from "firebase/firestore";
 import AlertComponent from "../../components/AlertComponent";
 import { Places } from "../../const/Places";
 import { carBrands } from "../../const/carBrands";
+import CreateButton from "../../components/CreateButton";
 
 function AdminPanelCreateCar() {
   const [carModel, setCarModel] = useState(""); // State for car model
@@ -271,7 +272,7 @@ function AdminPanelCreateCar() {
           onChange={(e) => setCarPlate(e.target.value)}
         />{" "}
         {/* Controlled input for car plate */}
-        <Button
+        {/* <Button
           onClick={() => {
             if (
               carModel != "" &&
@@ -293,7 +294,26 @@ function AdminPanelCreateCar() {
           variant="contained"
         >
           Insert from input
-        </Button>
+        </Button> */}
+        <CreateButton onClick={() => {
+            if (
+              carModel != "" &&
+              dailyPrice != "" &&
+              gearType != "" &&
+              location != "" &&
+              seatAmount != "" &&
+              carImageRef != "" &&
+              carPlate != ""
+            ) {
+              setOpen(true);
+            } else {
+              setAlertType("warning");
+              setErrorDetail("warning-message");
+              setErrorMessage("You have to fill all the inputs.");
+              setErrorStatus(true);
+            }
+          }} 
+          InputText={"Insert Input"} />
       </Card>
     </div>
   );

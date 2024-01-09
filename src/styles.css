@@ -314,3 +314,151 @@
   opacity: 0; /* Başlangıç durumunda metni görünmez yap */
   animation: slideInFromLeft 0.8s ease forwards 0.6s; /* Animasyonu 2 saniye sonra başlat */
 }
+
+.button {
+  margin-right: 5px;
+  margin-top: 2vh;
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+}
+
+.button:hover {
+  letter-spacing: 3px;
+  background-color: #1E70E1 !important;
+  color: hsl(0, 0%, 100%);
+  box-shadow: #1E70E1;
+}
+
+.button:active {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%) !important;
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+.create-button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+}
+
+.create-button, .create-button__icon, .create-button__text {
+  transition: all 0.3s;
+}
+
+.create-button .create-button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.create-button .create-button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #34974d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-button .svg {
+  width: 30px;
+  stroke: #fff;
+}
+
+.create-button:hover {
+  background: #34974d;
+}
+
+.create-button:hover .create-button__text {
+  color: transparent;
+}
+
+.create-button:hover .create-button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.create-button:active .create-button__icon {
+  background-color: #2e8644;
+}
+
+.create-button:active {
+  border: 1px solid #2e8644;
+}
+.delete-button {
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  background: #e62222;
+ }
+ 
+ .delete-button, .delete-button span {
+  transition: 200ms;
+ }
+ 
+ .delete-button .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+ }
+ 
+ .delete-button .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(110px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+ 
+ .delete-button svg {
+  width: 15px;
+  fill: #eee;
+ }
+ 
+ .delete-button:hover {
+  background: #ff3636;
+ }
+ 
+ .delete-button:hover .text {
+  color: transparent;
+ }
+ 
+ .delete-button:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+ }
+ 
+ .delete-button:focus {
+  outline: none;
+ }
+ 
+ .delete-button:active .icon svg {
+  transform: scale(0.8);
+ }

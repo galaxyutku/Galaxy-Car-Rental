@@ -22,6 +22,7 @@ import { auth } from "../../utils/firebaseConfig";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../components/AlertComponent";
+import DeleteButton from "../../components/DeleteButton";
 
 function AdminPanelDeleteCar() {
   const apiRef = useGridApiRef();
@@ -189,11 +190,7 @@ function AdminPanelDeleteCar() {
           </>
         )}
       </div>
-      <Button
-        variant="contained"
-        color="error"
-        startIcon={<DeleteIcon />}
-        onClick={() => {
+    <DeleteButton onClick={() => {
           if(checkIfDataSelected()){
             setOpen(true);
           }
@@ -203,10 +200,8 @@ function AdminPanelDeleteCar() {
             setAlertType("warning");
             setErrorStatus(true);
           }
-        }}
-      >
-        DELETE CARS
-      </Button>
+        }} 
+        InputText={"Delete"} />
     </div>
   );
 }
