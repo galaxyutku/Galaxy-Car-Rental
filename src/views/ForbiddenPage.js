@@ -3,6 +3,7 @@ import "../styles.css";
 import "../const/Colors";
 import { Button, Card, CardHeader } from "@mui/material";
 import { useNavigate } from "react-router";
+import DetailComponent from "../components/DetailComponent";
 
 function ForbiddenPage() {
   const navigate = useNavigate();
@@ -19,11 +20,7 @@ function ForbiddenPage() {
       }}
     >
       <Card>
-        <CardHeader
-          title={
-            "This is forbidden area for your user permissions. Please go homepage."
-          }
-        />
+        <DetailComponent IncomingText={"This page is restricted go home."} />
       </Card>
       <Button
         variant="contained"

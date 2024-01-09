@@ -21,6 +21,7 @@ import { auth, db } from "../../utils/firebaseConfig";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../components/AlertComponent";
+import DeleteButton from "../../components/DeleteButton";
 
 function AdminPanelBookingManagement() {
   const apiRef = useGridApiRef();
@@ -205,11 +206,7 @@ function AdminPanelBookingManagement() {
           </>
         )}
       </div>
-      <Button
-        variant="contained"
-        color="error"
-        startIcon={<DeleteIcon />}
-        onClick={() => {
+      <DeleteButton onClick={() => {
           if(checkIfDataSelected()){
             setOpen(true);
           }
@@ -219,10 +216,7 @@ function AdminPanelBookingManagement() {
             setAlertType("warning");
             setErrorStatus(true);
           }
-        }}
-      >
-        DELETE BOOKING
-      </Button>
+        }} InputText={"Delete"} />
     </div>
   );
 }

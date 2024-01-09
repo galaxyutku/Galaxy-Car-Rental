@@ -46,7 +46,7 @@ function NavigationBar() {
                     (
                         <>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
-                            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>PROFILE</Link>
+                            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>MY BOOKINGS</Link>
                         </Button>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
                             <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>FAQ</Link>
@@ -60,7 +60,7 @@ function NavigationBar() {
                     (
                     <>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
-                            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>PROFILE</Link>
+                            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>MY BOOKINGS</Link>
                         </Button>
                         <Button variant="text" style={{ color: "white", marginRight: 20 }}>
                             <Link to="/FAQPage" style={{ textDecoration: 'none', color: 'inherit',width:"100%", height:"100%", display:"flex", justifyContent:"center",flexDirection:"column" }}>FAQ</Link>

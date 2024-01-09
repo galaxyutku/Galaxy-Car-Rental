@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 import { Places } from "../const/Places";
 import AlertComponent from "../components/AlertComponent";
 import MuiAlert from "@mui/material/Alert";
+import RealisticButtonComponent from "../components/RealisticButtonComponent";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -205,7 +206,7 @@ function HomePage() {
               />
             </LocalizationProvider>
           </div>
-          <Button
+          {/* <Button
             onClick={searchHandle}
             style={{
               backgroundColor: "white",
@@ -216,7 +217,8 @@ function HomePage() {
             }}
           >
             Search
-          </Button>
+          </Button> */}
+          <RealisticButtonComponent bgColor={"white"} InputText={"Search"} onClick={searchHandle} />
         </div>
       </div>
       <div className="featuresContainer">

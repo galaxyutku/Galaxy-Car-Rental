@@ -32,6 +32,9 @@ import { db, auth } from "../utils/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import MuiAlert from "@mui/material/Alert";
+import DetailComponent from "../components/DetailComponent";
+import ButtonComponent from "../components/RealisticButtonComponent";
+import RealisticButtonComponent from "../components/RealisticButtonComponent";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -314,12 +317,7 @@ function DetailsPage() {
               <Card className="paymentContainer">
                 <CardContent className="paymentItems">
                   <div className="paymentHeader">
-                    <Typography sx={{ fontWeight: "bold", fontSize: "140%" }}>
-                      Car Price Details
-                      <Divider
-                        sx={{ marginTop: "10px", marginBottom: "10px" }}
-                      />
-                    </Typography>
+                    <DetailComponent IncomingText={"Car Price Details"} />
                   </div>
                   <Typography
                     className="rentPayment"
@@ -348,24 +346,8 @@ function DetailsPage() {
             </Grid>
           </div>
           <div className="bookButton">
-            {auth.currentUser ? <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#ffa42c",
-                color: "black",
-                ":hover": {
-                  bgcolor: "#ffa42c",
-                  color: "white",
-                  transition:
-                    "background-color 0.4s ease-in-out, color 0.4s ease-in-out",
-                },
-                width: "50%",
-              }}
-              onClick={handleBooking}
-              className="bookButton"
-            >
-              BOOK NOW
-            </Button>
+          {auth.currentUser ? 
+            <RealisticButtonComponent bgColor={"#EBBF14"} InputText={"BOOK"} onClick={handleBooking} />
             :
             null}
           </div>
