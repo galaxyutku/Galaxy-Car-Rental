@@ -132,3 +132,49 @@ export const userColumns = [
         editable: false,
       },
 ];
+
+export const editableCarColumns = [
+  { field: "id", headerName: "ID", width: 50 },
+  {
+    field: "carModel",
+    headerName: "Car Model",
+    width: 110,
+    editable: true,
+  },
+  {
+      field: "carPlate",
+      headerName: "Car Plate",
+      width: 110,
+      editable: true,
+    },
+    {
+      field: "dailyPrice",
+      headerName: "Daily Price",
+      width: 110,
+      editable: true,
+    },
+    {
+      field: "gearType",
+      headerName: "Gear Type",
+      width: 110,
+      editable: true,
+    },
+    {
+      field: "location",
+      headerName: "Location",
+      width: 110,
+      editable: true,
+    },
+    {
+      field: "seatAmount",
+      headerName: "Seat Amount",
+      width: 110,
+      editable: true,
+    },
+    {
+      field: "carImageRef",
+      headerName: "Car Image Link",
+      width: 140,
+      editable: true,
+    },
+];

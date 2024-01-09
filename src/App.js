@@ -5,7 +5,6 @@ import {
   Routes,
 } from 'react-router-dom';
 import HomePage from './views/HomePage';
-import Template from './views/Template';
 import NavigationBar from './components/NavigationBar';
 import ResultPage from './views/ResultPage';
 import './styles.css';
@@ -32,7 +31,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/results" element={<ResultPage />} />
           <Route path="/details" element={<DetailsPage />} />
-          <Route path="/template" element={<Template />} />
           <Route path="/FAQPage" element={<FAQPage />} />
           <Route path="/forbidden" element={<ForbiddenPage />} />
         </Routes>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
-import { Colors } from "../Colors";
 import MuiAlert from '@mui/material/Alert';
 import { authErrors } from "../const/authErrors"; // Update the path accordingly
 

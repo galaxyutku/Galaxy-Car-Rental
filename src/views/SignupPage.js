@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles.css";
 import { useNavigate } from "react-router-dom";
-import { Colors } from "../Colors";
+import { Colors } from "../const/Colors";
 import {
   Box,
   Button,

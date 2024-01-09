@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles.css";
-import { Colors } from "../Colors";
+import { Colors } from "../const/Colors";
 import {
   Grid,
   CardMedia,

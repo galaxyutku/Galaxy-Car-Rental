@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles.css";
-import { Colors } from "../Colors";
 import Button from '@mui/material/Button';
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import {auth} from "../utils/firebaseConfig";

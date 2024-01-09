@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles.css";
-import "../Colors";
+import "../const/Colors";
 import { Button, Card, CardHeader } from "@mui/material";
 import { useNavigate } from "react-router";
 

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "../../styles.css";
-import { useNavigate } from "react-router-dom";
-import "../../Colors";
-import { Colors } from "../../Colors";
+import "../../const/Colors";
 import {
   Button,
   Card,
@@ -14,12 +12,11 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Divider,
   Autocomplete,
   TextField,
 } from "@mui/material";
 import { db } from "../../utils/firebaseConfig";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import AlertComponent from "../../components/AlertComponent";
 import { Places } from "../../const/Places";
 import { carBrands } from "../../const/carBrands";
