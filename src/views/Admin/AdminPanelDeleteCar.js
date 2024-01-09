@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles.css";
-import "../../Colors";
+import "../../const/Colors";
 import {
   Button,
   Card,
@@ -165,10 +165,11 @@ function AdminPanelDeleteCar() {
           </Button>
         </DialogActions>
       </Dialog>
-      <h3>Car Details</h3>
       <div style={{ width: "fit-content", height: "fit-content" }}>
         {rentData && carData && (
           <>
+            <CardHeader
+              title={'Car Management'} />
             <Divider />
             <DataGrid
               rows={rows}

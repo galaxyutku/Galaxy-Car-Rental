@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Grid } from "@mui/material";
-import { Colors } from "../Colors";
+import { Colors } from "../const/Colors";
 
 const faqData = [
   {

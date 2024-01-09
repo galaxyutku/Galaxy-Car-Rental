@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles.css";
-import "../../Colors";
+import "../../const/Colors";
 import {
   Button,
   Card,

@@ -28,18 +28,11 @@ function HomePage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [alertType, setAlertType] = useState("error");
   const [errorDetail, setErrorDetail] = useState("");
+  const [pickupDateFormat, setPickupDateFormat] = useState(null);
+  const [dropoffDateFormat, setDropoffDateFormat] = useState(null);
 
   const currentDate = dayjs(new Date()).format("DD/MM/YYYY");
   const searchHandle = () => {
-    // if(pickupDate)
-    //   setPickupValue(Number(String(pickupDate).split("/")[0]) + (Number(String(pickupDate).split("/")[1]) * 30) + (Number(String(pickupDate).split("/")[2]) * 360));
-    // if(dropoffDate)
-    //   setDropoffValue(Number(String(dropoffDate).split("/")[0]) + (Number(String(dropoffDate).split("/")[1]) * 30) + (Number(String(dropoffDate).split("/")[2]) * 360));
-    // if(currentDate)
-    //   setCurrentDateValue(Number(String(currentDate).split("/")[0]) + (Number(String(currentDate).split("/")[1]) * 30) + (Number(String(currentDate).split("/")[2]) * 360));
-    // console.log(Number(String(pickupDate).split(" ")[1]) + 1);
-    // console.log(Number(String(dropoffDate).split(" ")[1]) + 1);
-    // Check if pickupDate and dropoffDate is filled
     if (pickupDate === null || dropoffDate === null) {
       setErrorMessage("You have to select pick-up date and drop-off date.");
       setAlertType("warning");
@@ -79,6 +72,8 @@ function HomePage() {
           pickupPlace: { pickupPlace },
           pickupDate: { pickupDate },
           dropoffDate: { dropoffDate },
+          pickupDateFormat: {pickupDateFormat},
+          dropoffDateFormat: {dropoffDateFormat},
         },
       });
     }
@@ -173,6 +168,7 @@ function HomePage() {
                 }}
                 label="Pickup Date"
                 onChange={(newValue) => {
+                  setPickupDateFormat(new Date(newValue));
                   setPickupDate(dayjs(newValue.$d).format("DD/MM/YYYY"));
                 }}
               />
@@ -203,6 +199,7 @@ function HomePage() {
                 }}
                 label="Drop off Date"
                 onChange={(newValue) => {
+                  setDropoffDateFormat(new Date(newValue));
                   setDropoffDate(dayjs(newValue.$d).format("DD/MM/YYYY"));
                 }}
               />

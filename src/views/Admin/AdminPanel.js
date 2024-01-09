@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../styles.css";
 import { useNavigate } from "react-router-dom";
-import "../../Colors";
+import "../../const/Colors";
 import { Button, Card } from "@mui/material";
 
 function AdminPanel() {

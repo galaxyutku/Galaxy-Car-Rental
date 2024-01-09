@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles.css";
-import "../../Colors";
+import "../../const/Colors";
 import {
   Button,
   Card,
@@ -181,10 +181,11 @@ function AdminPanelBookingManagement() {
           </Button>
         </DialogActions>
       </Dialog>
-      <h3>Booking Details</h3>
-      <div style={{ width: "fit-content", height: "fit-content" }}>
+      <div style={{ width: "fit-content", height: "fit-content", maxHeight:"80%" }}>
         {rentData && carData && userData && (
           <>
+              <CardHeader
+              title={'Bookings Management'} />
             <Divider />
             <DataGrid
               rows={rows}

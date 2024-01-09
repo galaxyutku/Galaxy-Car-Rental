@@ -1,14 +1,9 @@
 import React from "react";
 import "../styles.css";
-import { Colors } from "../Colors";
-import Button from "@mui/material/Button";
 import {
-  Avatar,
   Card,
   CardContent,
-  CardHeader,
   CardMedia,
-  Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
@@ -31,30 +26,28 @@ function CardComponent({
     <div>
       <Card
         onClick={() => {
-          console.log(pickupDate);
-          console.log(dropoffDate);
           navigate("/details", {
             state: {
-              pickupPlace: {pickupPlace},
-              pickupDate: {pickupDate},
-              dropoffDate:  {dropoffDate},
-              carModel:  {carModel} ,
-              seatAmount:  {seatAmount} ,
-              gearType:  {gearType} ,
-              dailyPrice:  {dailyPrice} ,
-              carImageRef:  {carImageRef} ,
-              choosedPickupPlace: {choosedPickupPlace},
-              carHashID: {carHashID},
-              carImageRef: {carImageRef}
-            }
+              pickupPlace: { pickupPlace },
+              pickupDate: { pickupDate },
+              dropoffDate: { dropoffDate },
+              carModel: { carModel },
+              seatAmount: { seatAmount },
+              gearType: { gearType },
+              dailyPrice: { dailyPrice },
+              carImageRef: { carImageRef },
+              choosedPickupPlace: { choosedPickupPlace },
+              carHashID: { carHashID },
+              carImageRef: { carImageRef },
+            },
           });
         }}
         sx={{
           display: "flex",
           flexWrap: "row",
-          justifyContent: "center",
-          width: "45vh",
-          height: 330,
+          justifyContent: "left",
+          width: "120vh",
+          height: "22vh",
           border: "1px gray solid",
           "&:hover": {
             boxShadow: "3px 3px gray",
@@ -68,61 +61,59 @@ function CardComponent({
           component="img"
           image={carImageRef}
           alt="Car Image"
-          sx={{ maxWidth: "20vh", objectFit: "cover" }}
+          sx={{ maxWidth: "40vh", objectFit: "cover" }}
         />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "35vh",
+            width: "100%",
+            height:"100%",
             fontSize: "1vw",
             justifyContent: "center",
             textAlign: "center",
           }}
         >
-          <CardHeader title={carModel} subheader={pickupPlace} />
           <CardContent
-            sx={{
+              sx={{
               display: "flex",
               flexDirection: "row",
-              flexWrap: "wrap",
+              flexWrap:"wrap",
+              width:"100%",
+              height: "100%",
               justifyContent: "center",
+              alignItems:"center",
               gap: 2,
             }}
           >
-            <Typography
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                gap: "3px",
-              }}
-            >
+              <span style={{fontWeight:"bold"}}>Car: </span>{carModel}
               <PersonIcon />
               <span>{seatAmount} Seat</span>
-            </Typography>
-            <Typography
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                gap: "3px",
-              }}
-            >
               <DirectionsCarIcon />
               <span>{gearType}</span>
-            </Typography>
           </CardContent>
           <CardContent
             sx={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
               gap: 1,
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <span>Daily Price</span>
+            <span style={{fontWeight:"bold"}}>Location:</span>
+            <span>{pickupPlace}</span>
+          </CardContent>
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <span style={{fontWeight:"bold"}}>Daily Price:</span>
             <span>{dailyPrice} $</span>
           </CardContent>
         </div>

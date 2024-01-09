@@ -2,18 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../styles.css";
 import { useLocation } from "react-router-dom";
 import {
-  CardMedia,
   CardHeader,
   Card,
   CardContent,
   Typography,
-  CardActions,
-  Button,
-  Avatar,
-  IconButton,
-  Select,
-  MenuItem,
-  InputLabel,
   Autocomplete,
   TextField,
   Skeleton,
@@ -21,9 +13,9 @@ import {
 import CardComponent from "../components/CardComponent";
 import { db } from "../utils/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
-import { Label } from "@mui/icons-material";
 import { carBrands } from "../const/carBrands";
 import { Places } from "../const/Places";
+import dayjs from "dayjs";
 
 function ResultPage() {
   const location = useLocation();
@@ -36,17 +28,39 @@ function ResultPage() {
   const [selectedGearType, setSelectedGearType] = useState("");
   const [selectedSeatAmount, setSelectedSeatAmount] = useState("");
   const [carBrand, setCarBrand] = useState("");
-
   const [carData, setCarData] = useState(null);
+  const [rentData, setRentData] = useState(null);
+  const [pickupDateFormat, setPickupDateFormat] = useState(dayjs(location.state.pickupDateFormat.pickupDateFormat));
+  const [dropoffDateFormat, setDropoffDateFormat] = useState(dayjs(location.state.dropoffDateFormat.dropoffDateFormat));
+
   const carCollectionRef = collection(db, "car-data");
+  const rentCollectionRef = collection(db, "rent-status");
 
   useEffect(() => {
     const getCarData = async () => {
       const data = await getDocs(carCollectionRef);
       setCarData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
+    const getBookingData = async () => {
+      const data = await getDocs(rentCollectionRef);
+      setRentData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
     getCarData();
+    getBookingData();
   }, []);
+
+  function isDateRangeOverlapping(rentBetween, pickupDateFormat, dropoffDateFormat)  {
+    const startRentDate = (dayjs(String(rentBetween).split("-")[0], "DD/MM/YYYY"));
+    const endRentDate = (dayjs(String(rentBetween).split("-")[1], "DD/MM/YYYY"));
+    const pickupDate = new Date(pickupDateFormat);
+    const dropoffDate = new Date(dropoffDateFormat);
+  
+    return (
+      (startRentDate <= pickupDate && endRentDate >= pickupDate) ||
+    (startRentDate <= dropoffDate && endRentDate >= dropoffDate) ||
+    (startRentDate >= pickupDate && endRentDate <= dropoffDate)
+    );
+  }
 
   return (
     <div className="resultpage">
@@ -152,6 +166,8 @@ function ResultPage() {
                 <TextField {...params} label="Seat Amount" />
               )}
               onInputChange={(event, newInputValue) => {
+                console.log(new Date(pickupDateFormat));
+                console.log(new Date(dropoffDateFormat));
                 setSelectedSeatAmount(newInputValue);
               }}
             />
@@ -159,15 +175,23 @@ function ResultPage() {
         </Card>
       </div>
       <div className="cardContainer">
-        {carData ? (
+        {(carData && rentData) ? (
           carData
             .filter((car) => {
+              const matchedRentData = rentData.find(
+                (rent) =>
+                  (rent.carHash == car.id) &&
+                  isDateRangeOverlapping(rent.rentBetween, pickupDateFormat, dropoffDateFormat)
+              );
+              if (matchedRentData &&(matchedRentData.carHash != "" && matchedRentData.carHash == car.id)) {
+                return false;
+              }
               if (
                 (selectedGearType != "" && car.gearType != selectedGearType) ||
                 (selectedSeatAmount != "" &&
                   car.seatAmount != selectedSeatAmount) ||
                 (carBrand != "" && car.carModel.split(" ")[0] != carBrand) ||
-                (choosedPickupPlace != "" && choosedPickupPlace != car.location)
+                (choosedPickupPlace != "" && choosedPickupPlace != car.location) 
               ) {
                 return false;
               }
