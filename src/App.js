@@ -8,6 +8,7 @@ import Template from './views/Template';
 import NavigationBar from './components/NavigationBar';
 import ResultPage from './views/ResultPage';
 import "./styles.css";
+import DetailsPage from './views/DetailsPage';
 
 function App() {
 
@@ -21,8 +22,8 @@ function App() {
       element: <ResultPage />,
     },
     {
-      path: "template",
-      element: <Template />,
+      path: "details",
+      element: <DetailsPage />,
     },
   ])
 
