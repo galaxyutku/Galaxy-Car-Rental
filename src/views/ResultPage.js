@@ -26,7 +26,6 @@ function ResultPage() {
     const [seatAmount, setSeatAmount] = useState(null);
     const [gearType, setGearType] = useState(null);
     const [dailyPrice, setDailyPrice] = useState(null);
-    const [weeklyPrice, setWeeklyPrice] = useState(null);
 
     const [carData, setCarData] = useState(null);
     const carCollectionRef = collection(db, "car-data");
@@ -112,7 +111,6 @@ function ResultPage() {
                     seatAmount={car.seatAmount}
                     gearType={car.gearType}
                     dailyPrice={car.dailyPrice}
-                    weeklyPrice={car.weeklyPrice}
                 />
             ))
             ) : (

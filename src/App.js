@@ -1,41 +1,45 @@
 import React from 'react';
 import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import HomePage from './views/HomePage';
 import Template from './views/Template';
 import NavigationBar from './components/NavigationBar';
 import ResultPage from './views/ResultPage';
-import "./styles.css";
+import './styles.css';
 import DetailsPage from './views/DetailsPage';
-import FAQPage from './views/FAQPage';
+import LoginPage from './views/LoginPage';
+import SignupPage from './views/SignupPage';
+import AdminPanel from './views/AdminPanel';
+import {auth} from "./utils/firebaseConfig";
 
 function App() {
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <HomePage />,
-    },
-    {
-      path: "results",
-      element: <ResultPage />,
-    },
-    {
-      path: "details",
-      element: <DetailsPage />,
-    },
-    {
-      path: "faq",
-      element: <FAQPage />,
-    },
-  ])
-
   return (
     <div className="mainStyling">
+      <Router>
       <NavigationBar />
-      <RouterProvider router={router}/>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/results" element={<ResultPage />} />
+          <Route path="/details" element={<DetailsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/template" element={<Template />} />
+          {
+            (auth.currentUser.email != "admin@gmail.com")
+            ?
+            (
+              null
+            )
+            :
+            (
+              <Route path="/adminpanel" element={<AdminPanel />} />
+            )
+          }
+        </Routes>
+      </Router>
     </div>
   );
 }
